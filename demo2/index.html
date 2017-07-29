@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React之JSX</title>
+    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+    <script type="text/babel">
+      var names = ['张三', '李四', '王五'];
+      ReactDOM.render(
+        <div>
+          {
+            names.map(function (name) {
+              return <div>你好, {name}</div>
+            })
+          }
+        </div>,
+        document.getElementById('example')
+      );
+    </script>
+  </body>
+</html>
