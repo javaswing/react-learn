@@ -10,7 +10,43 @@
   <body>
     <div id="example"></div>
     <script type="text/babel">
-      
+      // 一、组件的介绍
+      // react组件有两个定义方式，函数定义方式和类定义方式
+      // 1.函数定义方式
+      function Welcome(props) {
+        return <h1>你好！{props.name}</h1>
+      }
+      // 2.类定义方式
+      // class Welcome extends React.Component {
+      //   render() {
+      //     return <h1>你好！{props.name}</h1>
+      //   }
+      // }
+      // 关于组件的命令：
+      // 1.必须是大写字母开头
+      // const element = <Welcome name="JavaSwing"/>
+      // ReactDOM.render(
+      //   element,
+      //   document.getElementById('example')
+      // );
+      // 二、组合组件
+      // 1、组件的返回值只有一个根元素，如下例子中要用div元素包含引入的组件，在vue中也是如此
+      function App() {
+        return (
+          <div>
+            <Welcome name="张三"></Welcome>
+            <Welcome name="李四"></Welcome>
+            <Welcome name="GG"></Welcome>
+          </div>
+        )
+      }
+      ReactDOM.render(
+        <App/>,
+        document.getElementById('example')
+      );
+      // 三、关于props的只读性
+      // 1、在react中“数据流是单向的”
+      // 所以父组件能传递给子组件props，但是子组件不能向上改变父组件的值
     </script>
   </body>
 </html>

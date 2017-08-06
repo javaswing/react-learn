@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>React 之组件学习（state和生命周期）</title>
+  <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="example"></div>
+  <script type="text/babel">
+    // 一、下面是，是目前能更新DOM的方法
+    // function tick() { 
+    //   const element = (
+    //     <div>
+    //       <h1>Hello,World</h1>
+    //       <h2>现在时间为： {new Date().toLocaleTimeString()}</h2>
+    //     </div>
+    //   )
+    //   ReactDOM.render( element, document.getElementById('example') ) 
+    // } 
+    // setInterval(tick, 1000);
+    // 二、封装成组件，把上面的功能封装成一个组件，用函数形式
+    // 下面的这样写法，是把一个功能封装成了一个，组件，但是有一个问题就是：
+    // 自更新的功能应该是Clock组件内部实现而不是，根组件调用
+    function Clock(props) {
+      return (
+        <div>
+          <h2>您好！</h2>
+          <h3>当前时间为：{props.data.toLocaleTimeString()}</h3>
+        </div>
+      )
+    }
+    function tick() {      
+      ReactDOM.render(
+      <Clock data={new Date()}/>,
+      document.getElementById('example') ) 
+    } 
+    setInterval(tick, 1000);
+
+  </script>
+</body>
+
+</html>

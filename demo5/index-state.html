@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>React 之组件学习（state）</title>
+  <script src="https://unpkg.com/react@latest/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="example"></div>
+  <script type="text/babel">
+    // 更改为Clock自调用前，首页先把函数的实现组件，更改为ES6的class方式实现
+    // 使用类就允许我们使用其它特性，例如局部状态、生命周期钩子
+    // class Clock extends React.Component {
+    //   render() {
+    //     return (
+    //       <div>
+    //         <h2>您好！</h2>
+    //         <h3>当前时间为：{this.props.data.toLocaleTimeString()}</h3>
+    //       </div>
+    //     )
+    //   }
+    // }
+
+    // function tick() {      
+    //   ReactDOM.render(
+    //   <Clock data={new Date()}/>,
+    //   document.getElementById('example') ) 
+    // } 
+    // setInterval(tick, 1000);
+    // 二、更改为用state状态
+    // class Clock extends React.Component {
+    //   constructor(props) {
+    //     super(props);
+    //     this.state = {date: new Date()}
+    //   }
+
+    //   render() {
+    //     return (
+    //       <div>
+    //         <h2>您好！</h2>
+    //         <h3>当前时间为：{this.state.date.toLocaleTimeString()}</h3>
+    //       </div>
+    //     )
+    //   }
+    // }
+    
+    //   ReactDOM.render(
+    //     <Clock/>,
+    //     document.getElementById('example') 
+    //   ) 
+    // 三、添加生命周期构子： componentDidMount() 、 componentWillUnmount()
+    class Clock extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {date: new Date()}
+      }
+
+      componentDidMount() {
+        // 如果不在显示设置什么，以及render()方法中使用，可以在组件添加一些局部变量
+        this.timeID = setInterval(()=> {
+          this.tick()
+        }, 1000)
+        console.log('组件挂载')
+      }
+
+      componentWillUnmount() {
+        clearSetInterval(this.timeID)
+        console.log('组件销毁')
+      }
+
+      tick() {
+        this.setState({
+          date: new Date()
+        })
+      }
+
+      render() {
+        return (
+          <div>
+            <h2>您好！</h2>
+            <h3>当前时间为：{this.state.date.toLocaleTimeString()}</h3>
+          </div>
+        )
+      }
+    }
+    
+    ReactDOM.render(
+      <Clock/>,
+      document.getElementById('example') 
+    ) 
+    // 四、关于state状态的几点：
+    // 1、不要直接更新状态，下面的代码不会重新渲染组件
+    // this.state.date = new Date()
+    // 应当使用，this.setState()
+    // this.setState({data: new Date()})
+    
+  </script>
+</body>
+
+</html>
