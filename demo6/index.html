@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>React 之事件处理</title>
+  <title>React 之事件处理（Handling Events）</title>
   <script src="https://unpkg.com/react@latest/dist/react.js"></script>
   <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
@@ -11,7 +11,35 @@
 <body>
   <div id="example"></div>
   <script type="text/babel">
-   
+    class Toggle extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {isToggle: true}
+        // 绑定事件,要注意的是必须要bind(this)才能回调的时候正常，否则返回的是undifined
+        this.handleClick = this.handleClick.bind(this);
+      }
+
+      handleClick() {
+        this.setState(prevState =>({
+          isToggle: !prevState.isToggle
+        }));
+      }
+
+      render() {
+        return (
+          <div>
+            <button onClick={this.handleClick}>
+              {this.state.isToggle? 'NO': 'OFF'}
+            </button>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <Toggle/>,
+      document.getElementById('example')
+    )
   </script>
 </body>
 
