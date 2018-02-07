@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>React JSX 3</title>
-    <script src="https://unpkg.com/react@latest/dist/react.js"></script>
-    <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+	  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
   </head>
   <body>
@@ -39,10 +39,10 @@
       //   <h1>你好！ {formatName(user)}</h1>        
       // );
       const greeting = {
-        backgroundColor:'red',  
-        color:'white',  
+        backgroundColor:'red',
+        color:'white',
         fontSize:40 
-      }
+      };
       const element = (
         // 使用引号来定义一个字条串
         // <div tabIndex="0" ></div>
@@ -50,7 +50,7 @@
         // <img src="{user.avatarUrl}" alt=""/>
         // 注意class在JSX中要使用className形式，tabindex 换成tabIndex。因为JSX的命令方式为camelCase,而class在js中是关键字
         <div className="geeting3" style={greeting}>222</div>
-      )
+      );
 
       ReactDOM.render(
         element,

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>React 之组件学习（state）</title>
-  <script src="https://unpkg.com/react@latest/dist/react.js"></script>
-  <script src="https://unpkg.com/react-dom@latest/dist/react-dom.js"></script>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
 </head>
 
@@ -60,6 +60,7 @@
 
       componentDidMount() {
         // 如果不在显示设置什么，以及render()方法中使用，可以在组件添加一些局部变量
+        console.log(this)
         this.timeID = setInterval(()=> {
           this.tick()
         }, 1000)
@@ -96,7 +97,45 @@
     // this.state.date = new Date()
     // 应当使用，this.setState()
     // this.setState({data: new Date()})
-    
+    // 2、状态更新可能是异步的
+    // 注：React可以将多个setState()调用合并成一个来提高性能
+    // 因为 this.state 和 this.props可能是异步进行更新的（ajax查询），你不应该依靠它的值来计算下一个状态
+    // 例如：
+    // this.setState({
+    //   counter: this.state.counter + this.props.increment
+    // });
+    // 要修复这个情况，要使用setState的第二种形式进行操作，用一个函数来代码对象
+    // this.setState((prevState, props) => ({
+    //   counter: prevState.counter + props.increment
+    // }));
+    // 3、状态的更新与合并
+    // 当调用 setState 方法时，React将你提供的对象合并到当前的状态中
+    // 例如：
+    // constructor(props) {
+    //   super(props);
+    //   this.state = {
+    //     posts: [],
+    //     comments: []
+    //   }
+    // }
+    // 调用 setState()独立地更新它们
+    // componentDidMount() {
+    //   fetchPosts().then(res => {
+    //     this.setState({
+    //       posts: res.posts
+    //     });
+    //   });
+    //   fetchComments().then(res => {
+    //     this.setState({
+    //       coments: res.comments
+    //     })
+    //   })
+    // }
+    // 注意：这里的合并是浅合并，也就是说 this.setState({comonets}) 完成保留了 this.state.posts,但是完全替换了
+    // this.state.comments
+
+    // 五、数据自顶向下流动（单向数据流）
+    // 在组件树中，所有的数据都是从顶向下流动。而且父组件中并不知道子组件是否是有状态的还是无状态。这一点和vue是一样的
   </script>
 </body>
 

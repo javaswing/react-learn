@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>React 之事件处理（Handling Events）参数传递</title>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="example"></div>
+  <script type="text/babel">
+    class Popper extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          name: 'javaSwing'
+        };
+      }
+      // e 必须要放到传入的参数之后
+      preventPop(name, e) {
+        e.preventDefault();
+        alert(name)
+      }
+      // <a href="www.baidu.com" onClick={this.preventPop.bind(this, this.state.name)}>点我传入参数</a>
+      render() {
+        return (
+          <div>
+            <a href="www.baidu.com" onClick={(e) => this.preventPop(this.state.name, e)}>点我传入参数</a>
+          </div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <Popper/>,
+      document.getElementById('example')
+    );
+  </script>
+</body>
+</html>
