@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>React 之条件渲染（Conditional Rendering）运算符</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+       function MailBox(props) {
+           const unreadMsg = props.unreadMsg;
+           return (
+               <div>
+                   {unreadMsg.length > 0 && 
+                        <h2>你有{unreadMsg.length}条信息未读</h2>
+                    }
+               </div>
+           )
+       }
+
+       const msg = ["react", "ra", "dom"];
+       
+       // 三目运算符
+       function LoginStatus(props) {
+           return (
+               <div>登录状态：{props.status ? "登录" : "未登录"}</div>
+           )
+       }
+
+
+       function warningBanner(props) {
+           if(!props.warn) {
+               return null // return null 即可阻止组件渲染
+           }
+
+           return (<div>这是个警告</div>)
+       }
+
+       class Page extends React.Component {
+
+
+       }
+       ReactDOM.render(
+           <LoginStatus status={true}/>,
+           document.getElementById("example")
+       );
+    </script>
+</body>
+
+</html>
