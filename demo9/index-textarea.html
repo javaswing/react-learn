@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>React 之条件列表和key（List && key）textarea</title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        // 受控组件，在HTML中像<input>、<textarea>、<select>这类表单元素会维持自身状态，并根据用户输入进行更新，在React中可变状态通常保存在组件的状态属性中，
+        // 并且只能用setState方法进行更新
+        class EssayForm  extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {value: "请在文本框中输入内容"},
+                this.hanldeChange = this.hanldeChange.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            hanldeChange(e) {
+                this.setState({value: e.target.value})
+            }
+
+            handleSubmit(e) {
+                alert("你输入的内容为：" + this.state.value)
+                e.preventDefault();
+            }
+
+            render() {
+                return (
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            姓名：<textarea onChange={this.hanldeChange} value={this.state.value}/>                           
+                        </label>
+                         <input type="submit" value="提交"/>
+                    </form>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <EssayForm/>,
+            document.getElementById("example")
+        )
+    </script>
+</body>
+
+</html>
