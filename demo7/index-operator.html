@@ -32,7 +32,7 @@
        }
 
 
-       function warningBanner(props) {
+       function WarningBanner(props) {
            if(!props.warn) {
                return null // return null 即可阻止组件渲染
            }
@@ -41,11 +41,32 @@
        }
 
        class Page extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {showWarning: false};
+                this.handleToggleClick = this.handleToggleClick.bind(this);
+            }
 
+            handleToggleClick() {
+                this.setState(preState => ({
+                    showWarning: !preState.showWarning
+                }));
+            }
+
+            render (){
+                return (
+                    <div>
+                        <WarningBanner warn={this.state.showWarning}/>
+                        <button onClick={this.handleToggleClick}>
+                            {this.state.showWarning ? "关闭" : "显示"}
+                        </button>
+                    </div>
+                )
+            }
 
        }
        ReactDOM.render(
-           <LoginStatus status={true}/>,
+           <Page/>,
            document.getElementById("example")
        );
     </script>
