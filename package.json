@@ -1,0 +1,19 @@
+{
+  "name": "react-learn",
+  "version": "1.0.0",
+  "description": "> 这是一个学习React的项目，各个目录下都有对这个目录学习东西的解释",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javaSwing/react-learn.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/javaSwing/react-learn/issues"
+  },
+  "homepage": "https://github.com/javaSwing/react-learn#readme"
+}
