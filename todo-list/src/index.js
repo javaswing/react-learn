@@ -23,6 +23,12 @@ class ToDo extends React.Component {
 }
 
 
+function Tips (props) {
+    let refDiv = null
+    return (<div onClick={(e) => props.onTipsClick(refDiv,e)} 
+            ref={(element) => refDiv = element}>tips: {props.text}</div>)
+}
+
 class App extends React.Component {
     constructor (props) {
         super(props)
@@ -30,6 +36,7 @@ class App extends React.Component {
             nowTodo: '',
             todoList: []
         }
+        this.myRef = React.createRef()
     }
 
     componentDidMount () {
@@ -38,15 +45,21 @@ class App extends React.Component {
             '杜甫', 
             'javaSwing'
         ]
-        this.timer = setTimeout(() => {
-            this.setState({
-                todoList
-            })
-        }, 2000)
+        this.setState({
+            todoList
+        })
+        // this.timer = setTimeout(() => {
+        //     this.setState({
+        //         todoList
+        //     }, () => {
+        //         console.log(this.myRef.current)
+        //     })
+        // }, 2000)
+       
     }
 
     componentWillUnmount () {
-        this.timer && clearTimeout(this.timer)
+        // this.timer && clearTimeout(this.timer)
     }
 
     // 绑定this
@@ -72,9 +85,14 @@ class App extends React.Component {
         })
     }
 
+    handleTipClick = (ref, e) =>{
+        console.log(ref)
+        console.log(e)
+    }
+
     render () {
         return (
-            <div>
+            <div >
                 <form onSubmit={this.handleSubmit}>
                 <input value={this.state.nowTodo} type="text" onChange={this.handleInputChange}/>
                 <button type="submit">提交</button>
@@ -82,10 +100,11 @@ class App extends React.Component {
                 <ul>
                     {
                         this.state.todoList.map((item, index) => {
-                            return <ToDo onRemove={e =>this.handleRemoveTodo(index, e)} key={index} index={index} content={item}></ToDo>
+                            return <ToDo ref={this.myRef} onRemove={e =>this.handleRemoveTodo(index, e)} key={index} index={index} content={item}></ToDo>
                         })
                     }
                 </ul>
+                <Tips onTipsClick={this.handleTipClick} text={'这是一个提示'}/>
             </div>            
         )
     }
