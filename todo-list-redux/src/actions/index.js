@@ -1,4 +1,4 @@
-export const ADD_TOOD = 'ADD_TODO';
+export const ADD_TODO = 'ADD_TODO';
 
 export const TOGGLE_TODO = 'TOGGLE_TODO';
 
@@ -20,7 +20,7 @@ export const VisiblityFilters = {
  *  
  */
 export const addTodo = (text) => {
-    return { type: ADD_TOOD, text }
+    return { type: ADD_TODO, text }
 };
 
 export const toggleTodo = (index) => {
