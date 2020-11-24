@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { SELECT_ALBUM, INVALIDATE_ALBUM, RECEIVE_POSTS, REQUEST_POSTS } from '../actions';
 
-const selectedAlbum = (state = '38963', actions) => {
+const selectedAlbum = (state = { label: '郭德纲', value: 38963}, actions) => {
   switch (actions.type) {
     case SELECT_ALBUM:
       return actions.album
@@ -47,7 +47,7 @@ const postsByAlbum = (state = {}, actions) =>{
     case REQUEST_POSTS:
       return {
         ...state,
-        [actions.album]: posts(state[actions.album], actions)
+        [actions.album.value]: posts(state[actions.album.value], actions)
       }
     default:
       return state

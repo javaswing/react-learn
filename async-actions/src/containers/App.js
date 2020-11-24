@@ -1,4 +1,4 @@
-import './App.css';
+import styles from './App.module.css';
 import React from 'react';
 import { connect } from 'react-redux';
 import Picker from '../components/Picker';
@@ -9,7 +9,10 @@ import { fetchPostIfNeeded , selectAlbum} from '../actions';
 class App extends React.Component {
 
   static propTypes = {
-    selectedAlbum: PropTypes.string.isRequired,
+    selectedAlbum:  PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.number.isRequired
+    }),
     posts: PropTypes.array.isRequired,
     isLoading: PropTypes.bool.isRequired,
     lastUpdated: PropTypes.number,
@@ -28,21 +31,25 @@ class App extends React.Component {
     }
   }
 
-  handleChange = nextAlbum => {
-    this.props.dispatch(selectAlbum(nextAlbum))
+  handleChange = nextAlbumId => {
+    const selectedAlbum = this.allAlbumList.find(album => album.value === Number(nextAlbumId))
+    this.props.dispatch(selectAlbum(selectedAlbum))
   }
+
+  allAlbumList = [
+    { label: '郭德纲', value: 38963 },
+    { label: '相声新星', value: 39109 },
+    { label: '粤语评书', value: 111 },
+  ]
 
   render () {
     const { isLoading, posts, selectedAlbum } = this.props;
     const isEmpty = posts.length === 0;
     return (
-      <div>
-        <Picker value={selectedAlbum}
+      <div className={styles.page}>
+        <Picker currentAlbum={selectedAlbum}
           onChange={this.handleChange}
-          options={
-            [
-               '38963', '38965'
-            ]}/>
+          options={this.allAlbumList}/>
         { isEmpty ? 
           (isLoading ? <h2>加载中...</h2>: <h2>暂无数据</h2>) 
           : <div> <Posts posts={posts}></Posts> </div>
@@ -59,7 +66,7 @@ const mapStateToProps = state => {
     isLoading,
     lastUpdated,
     items: posts
-  } = postsByAlbum[selectedAlbum] || {
+  } = postsByAlbum[selectedAlbum.value] || {
     isLoading: true,
     items: []
   }

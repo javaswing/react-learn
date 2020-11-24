@@ -2,16 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './containers/App';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware,compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import reducer from './reducer'
 import reportWebVitals from './reportWebVitals';
 
+// 调试redux
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const middlewares = [thunk, createLogger()]
 
-const store = createStore(reducer, applyMiddleware(...middlewares))
+const store = createStore(reducer, composeEnhancers(applyMiddleware(...middlewares)))
 
 ReactDOM.render(
   <Provider store={store}>
