@@ -37,9 +37,12 @@ class App extends React.Component {
   }
 
   allAlbumList = [
+    { label: '全部专辑', value: 4 },
     { label: '郭德纲', value: 38963 },
+    { label: '单田芳', value: 38965 },
+    { label: '评书大全', value: 38969 },
     { label: '相声新星', value: 39109 },
-    { label: '粤语评书', value: 111 },
+    { label: '戏曲名剧', value: 39133 },
   ]
 
   render () {

@@ -29,7 +29,7 @@ export const receivePosts = (album, json) => ({
 
 const fetchPost = album => dispatch => {
   dispatch(requestPosts(album))
-  return fetch(`https://api.imjad.cn/qqfm/v1/?type=album&page_size=10&id=${album.value}&page=1`,{
+  return fetch(`https://api.imjad.cn/qqfm/v1/?type=album&page_size=20&id=${album.value}&page=1`,{
   })
   .then(response => response.json())
   .then(json => {
