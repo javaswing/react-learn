@@ -1,11 +1,10 @@
-import React from "react";
 import "./App.css";
-import PureComponents from "./components/pure-component";
+import PureComponentDemo from "./components/pure";
 
 function App() {
   return (
     <div className="App">
-      <PureComponents />
+      <PureComponentDemo />
     </div>
   );
 }
